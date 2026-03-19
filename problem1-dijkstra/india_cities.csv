@@ -1,0 +1,17 @@
+city1,city2,distance
+Delhi,Jaipur,280
+Delhi,Lucknow,550
+Delhi,Chandigarh,250
+Jaipur,Ahmedabad,670
+Ahmedabad,Mumbai,530
+Mumbai,Pune,150
+Mumbai,Hyderabad,710
+Pune,Hyderabad,560
+Hyderabad,Bangalore,570
+Hyderabad,Chennai,630
+Bangalore,Chennai,350
+Chennai,Kolkata,1670
+Kolkata,Lucknow,990
+Lucknow,Patna,530
+Patna,Ranchi,330
+Ranchi,Kolkata,400
