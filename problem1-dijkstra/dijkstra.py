@@ -1,4 +1,27 @@
 import heapq
+import csv
+
+def load_graph_from_csv(filename):
+    graph = {}
+
+    with open(filename, 'r') as file:
+        reader = csv.DictReader(file)
+
+        for row in reader:
+            c1 = row['city1']
+            c2 = row['city2']
+            dist = int(row['distance'])
+
+            if c1 not in graph:
+                graph[c1] = []
+            if c2 not in graph:
+                graph[c2] = []
+
+            graph[c1].append((c2, dist))
+            graph[c2].append((c1, dist))  # undirected graph
+
+    return graph
+
 
 def dijkstra(graph, start):
 
@@ -11,6 +34,9 @@ def dijkstra(graph, start):
 
         current_distance, current_city = heapq.heappop(pq)
 
+        if current_distance > distances[current_city]:
+            continue
+
         for neighbor, weight in graph[current_city]:
 
             distance = current_distance + weight
@@ -22,13 +48,10 @@ def dijkstra(graph, start):
     return distances
 
 
-graph = {
-    "Hyderabad": [("Bangalore", 570), ("Chennai", 630)],
-    "Bangalore": [("Hyderabad", 570), ("Chennai", 350)],
-    "Chennai": [("Hyderabad", 630), ("Bangalore", 350)]
-}
+# LOAD DATA FROM CSV (OPEN SOURCE STYLE)
+graph = load_graph_from_csv("india_cities.csv")
 
-start_city = "Hyderabad"
+start_city = "Delhi"
 
 result = dijkstra(graph, start_city)
 
