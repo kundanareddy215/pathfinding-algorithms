@@ -1,9 +1,13 @@
 import heapq
+import random
 
 
+# Heuristic (Manhattan distance)
 def heuristic(a, b):
     return abs(a[0] - b[0]) + abs(a[1] - b[1])
 
+
+# A* Algorithm
 def astar(grid, start, goal):
 
     rows = len(grid)
@@ -14,7 +18,7 @@ def astar(grid, start, goal):
 
     g_cost = {start: 0}
 
-    directions = [(1,0),(-1,0),(0,1),(0,-1)]
+    directions = [(1,0), (-1,0), (0,1), (0,-1)]
 
     while open_list:
 
@@ -32,27 +36,58 @@ def astar(grid, start, goal):
 
                 new_cost = g_cost[current] + 1
 
-                if (nx,ny) not in g_cost or new_cost < g_cost[(nx,ny)]:
+                if (nx, ny) not in g_cost or new_cost < g_cost[(nx, ny)]:
 
-                    g_cost[(nx,ny)] = new_cost
-                    priority = new_cost + heuristic((nx,ny), goal)
+                    g_cost[(nx, ny)] = new_cost
+                    priority = new_cost + heuristic((nx, ny), goal)
 
-                    heapq.heappush(open_list,(priority,(nx,ny)))
+                    heapq.heappush(open_list, (priority, (nx, ny)))
 
     return None
 
 
-grid = [
-[0,0,0,1,0],
-[0,1,0,1,0],
-[0,0,0,0,0],
-[1,0,1,0,0],
-[0,0,0,0,0]
-]
+# Generate grid with random obstacles
+def generate_grid(size, obstacle_prob):
 
-start = (0,0)
-goal = (4,4)
+    grid = []
 
-distance = astar(grid,start,goal)
+    for i in range(size):
+        row = []
+        for j in range(size):
 
-print("Shortest path length:", distance)
+            if random.random() < obstacle_prob:
+                row.append(1)   # obstacle
+            else:
+                row.append(0)   # free
+
+        grid.append(row)
+
+    return grid
+
+
+# MAIN PROGRAM
+
+size = 10   # scaled version of 70x70
+start = (0, 0)
+goal = (size - 1, size - 1)
+
+
+# LOW density
+grid_low = generate_grid(size, 0.1)
+grid_low[0][0] = 0
+grid_low[size-1][size-1] = 0
+
+# MEDIUM density
+grid_medium = generate_grid(size, 0.2)
+grid_medium[0][0] = 0
+grid_medium[size-1][size-1] = 0
+
+# HIGH density
+grid_high = generate_grid(size, 0.3)
+grid_high[0][0] = 0
+grid_high[size-1][size-1] = 0
+
+
+print("Low density:", astar(grid_low, start, goal))
+print("Medium density:", astar(grid_medium, start, goal))
+print("High density:", astar(grid_high, start, goal))
