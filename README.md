@@ -1,19 +1,69 @@
 # Path Planning Algorithms
 
-## Problem 1: Dijkstra Algorithm for Indian Cities
+This repository contains implementations of three path planning problems using classical algorithms in Artificial Intelligence.
 
-This project implements Dijkstra's Algorithm to find the shortest distance between cities in India.
+---
 
-### Representation
-Cities are represented as nodes and roads are represented as edges with distances.
+## Problem 1: Dijkstra’s Algorithm (Indian Cities)
 
-### Algorithm
-Dijkstra’s algorithm is used to compute the shortest path from a selected source city to all other cities.
+Dijkstra’s Algorithm is implemented to compute the shortest path between cities in India using road distances.
 
-### Example Cities
-- Hyderabad
-- Bangalore
-- Chennai
+* Cities are represented as nodes
+* Roads are represented as weighted edges
+* Distances are taken from an open-source style dataset (CSV)
 
-### Output
-The program prints the shortest distance from the source city to all other cities.
+### Features
+
+* Graph constructed from external data (CSV file)
+* Computes shortest distance from a source city to all other cities
+* Demonstrates Uniform Cost Search
+
+---
+
+## Problem 2: UGV Navigation with Static Obstacles
+
+This problem simulates an Unmanned Ground Vehicle (UGV) navigating a grid-based battlefield with static obstacles.
+
+### Approach
+
+* The environment is represented as a grid
+* Obstacles are randomly generated
+* The A* search algorithm is used to find the shortest path
+
+### Features
+
+* Grid-based path planning
+* Random obstacle generation
+* Tested with different obstacle densities:
+
+  * Low density
+  * Medium density
+  * High density
+
+---
+
+## Problem 3: UGV Navigation with Dynamic Obstacles
+
+This problem extends Problem 2 by introducing dynamic obstacles that appear after the initial path is computed.
+
+### Approach
+
+* Initial path is computed using A*
+* Environment changes dynamically (new obstacle added)
+* Path is recomputed to adapt to the new environment
+
+### Features
+
+* Dynamic replanning
+* Demonstrates real-world adaptability of path planning algorithms
+* Handles cases where no path exists
+
+---
+
+## Algorithms Used
+
+* Dijkstra’s Algorithm (Uniform Cost Search)
+* A* Search Algorithm
+
+
+
